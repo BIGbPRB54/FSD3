@@ -1,0 +1,179 @@
+# API Endpoints
+
+The backend runs on:
+
+```text
+http://localhost:5000
+```
+
+All endpoints return JSON responses.
+
+## `GET /`
+
+Checks whether the backend is running.
+
+### Request
+
+```bash
+curl http://localhost:5000/
+```
+
+### Response
+
+```json
+{
+  "status": "ok"
+}
+```
+
+## `GET /api/projects`
+
+Returns all projects from `projects.json`.
+
+### Request
+
+```bash
+curl http://localhost:5000/api/projects
+```
+
+### Response
+
+```json
+[
+  {
+    "id": "mechx-website",
+    "title": "MECHX Website",
+    "description": "A website made for the Formula Student team.",
+    "techStack": "HTML, CSS",
+    "image": "",
+    "link": "https://example.com/mechx"
+  }
+]
+```
+
+## `GET /api/projects/:id`
+
+Returns a project using its ID.
+
+### Request
+
+```bash
+curl http://localhost:5000/api/projects/mechx-website
+```
+
+### Response
+
+```json
+{
+  "id": "mechx-website",
+  "title": "MECHX Website",
+  "description": "A website made for the Formula Student team.",
+  "techStack": "HTML, CSS",
+  "image": "",
+  "link": "https://example.com/mechx"
+}
+```
+
+If the project is not found:
+
+```json
+{
+  "error": "Project not found"
+}
+```
+
+HTTP status: `404`
+
+## `POST /api/contact`
+
+Submits a contact form message.
+
+### Request
+
+```bash
+curl -X POST http://localhost:5000/api/contact ^
+  -H "Content-Type: application/json" ^
+  -d "{\"name\":\"Ada\",\"email\":\"ada@example.com\",\"message\":\"Hello\"}"
+```
+
+### Response
+
+HTTP status: `201`
+
+```json
+{
+  "message": "Message submitted successfully.",
+  "submission": {
+    "name": "Ada",
+    "email": "ada@example.com",
+    "message": "Hello"
+  }
+}
+```
+
+If required fields are missing:
+
+```json
+{
+  "error": "Name, email, and message are required."
+}
+```
+
+HTTP status: `400`
+
+If the email is invalid:
+
+```json
+{
+  "error": "Please enter a valid email address."
+}
+```
+
+HTTP status: `400`
+
+## `GET /api/contact`
+
+Returns contact submissions received since the backend started.
+
+### Request
+
+```bash
+curl http://localhost:5000/api/contact
+```
+
+### Response
+
+```json
+[
+  {
+    "name": "Ada",
+    "email": "ada@example.com",
+    "message": "Hello"
+  }
+]
+```
+
+## Undefined Routes
+
+Unknown routes return a JSON `404` response.
+
+### Request
+
+```bash
+curl http://localhost:5000/api/doesnotexist
+```
+
+### Response
+
+```json
+{
+  "error": "Route not found"
+}
+```
+
+## Data Storage
+
+* Project data is stored in `projects.json`.
+* Contact submissions are stored temporarily in memory.
+* Contact submissions are cleared when the backend restarts.
+* No database is used.
