@@ -1,0 +1,26 @@
+[
+  {
+    "id": "mechx-website",
+    "title": "MECHX Website",
+    "description": "A website made for the Formula Student team.",
+    "techStack": "HTML, CSS",
+    "image": "",
+    "link": "https://example.com/mechx"
+  },
+  {
+    "id": "breathalert",
+    "title": "Breathalert",
+    "description": "A distant mapper alarming device.",
+    "techStack": "C, Sensors",
+    "image": "",
+    "link": "https://example.com/breathalert"
+  },
+  {
+    "id": "image-compressor",
+    "title": "Image Compressor",
+    "description": "An image compressor using K-means clustering.",
+    "techStack": "Python, K-means",
+    "image": "",
+    "link": "https://example.com/image-compressor"
+  }
+]
